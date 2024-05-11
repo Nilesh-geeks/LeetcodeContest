@@ -1,0 +1,31 @@
+Problem:: 3142. Check if Grid Satisfies Conditions
+
+You are given a 2D matrix grid of size m x n. You need to check if each cell grid[i][j] is:
+Equal to the cell below it, i.e. grid[i][j] == grid[i + 1][j] (if it exists).
+Different from the cell to its right, i.e. grid[i][j] != grid[i][j + 1] (if it exists).
+Return true if all the cells satisfy these conditions, otherwise, return false.
+
+
+
+Time Complexity :: O(N)
+Space Complexity:: O(1)
+
+
+Code::
+class Solution {
+public:
+    bool satisfiesConditions(vector<vector<int>>& grid) {
+       for(int i =0 ; i<grid.size() ; i++){
+           for(int j=0 ; j<grid[0].size()-1 ; j++){
+                if(grid[i][j]==grid[i][j+1])return 0;
+               }
+       } 
+        for(int i =0 ; i<grid[0].size(); i++){
+              int val = grid[0][i];
+            for(int j =0 ; j<grid.size(); j++){
+                if(val!= grid[j][i])return 0;
+            }
+        }
+        return 1;
+    }
+};
