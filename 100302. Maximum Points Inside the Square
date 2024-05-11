@@ -1,0 +1,38 @@
+Problem ::
+100302. Maximum Points Inside the Square
+You are given a 2D array points and a string s where, points[i] represents the coordinates of point i, and s[i] represents the tag of point i.
+A valid square is a square centered at the origin (0, 0), has edges parallel to the axes, and does not contain two points with the same tag.
+Return the maximum number of points contained in a valid square.
+
+Note:
+A point is considered to be inside the square if it lies on or within the square's boundaries.
+The side length of the square can be zero.
+
+Time Complexity::O(N)
+Space Complexity:: O(N)
+
+class Solution {
+public:
+    int maxPointsInsideSquare(vector<vector<int>>& points, string s) {
+        vector<pair<int, char>>v;
+        for(int i =0 ; i<points.size() ; i++){
+            v.push_back({max(abs(points[i][0]) ,abs(points[i][1])) , s[i]});
+        }
+        int maxi =0;
+        int cnt = 0;
+        sort(begin(v),end(v));
+        unordered_set<char>st;
+        for(auto &i:v){
+            if(st.find(i.second)==st.end()){
+                maxi  = max(maxi , i.first);
+                cnt++;
+                st.insert(i.second);
+            }
+            else{
+                if(maxi == i.first)cnt--;
+                break;
+            }
+        }
+        return cnt;
+    }
+};
